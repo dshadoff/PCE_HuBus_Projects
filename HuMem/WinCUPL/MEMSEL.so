@@ -1,0 +1,64 @@
+CSIM(WM): CUPL Simulation Program
+Version 5.0a Serial# 
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+CREATED Fri Feb 05 17:06:45 2021
+
+LISTING FOR SIMULATION FILE: MEMSEL.si
+
+   1: Name     Memsel;
+   2: PartNo   CA0017;
+   3: Date     01/31/21;
+   4: Revision 01;
+   5: Designer D. Shadoff;
+   6: Company  Nobody;
+   7: Assembly XXXXX;
+   8: Location XXXXX;
+   9: Device   G16V8A;
+  10: 
+  11: 
+  12: FIELD BANK = [A7,A6,A5,A4,A3];
+  13:
+  14: ORDER: A7, %1, A6, %1, A5, %1, A4, %1, A3, %1, !csROM, %1, !csRAM; 
+  15: 
+  16: 
+
+======================
+                ! !   
+                c c   
+                s s   
+                R R   
+      A A A A A O A   
+      7 6 5 4 3 M M   
+======================
+0001: 0 0 0 0 0 H H
+0002: 0 0 0 0 1 H H
+0003: 0 0 0 1 0 H H
+0004: 0 0 0 1 1 H H
+0005: 0 0 1 0 0 H H
+0006: 0 0 1 0 1 H H
+0007: 0 0 1 1 0 H H
+0008: 0 0 1 1 1 H H
+0009: 0 1 0 0 0 H H
+0010: 0 1 0 0 1 H H
+0011: 0 1 0 1 0 H H
+0012: 0 1 0 1 1 H H
+0013: 0 1 1 0 0 H H
+0014: 0 1 1 0 1 H H
+0015: 0 1 1 1 0 H H
+0016: 0 1 1 1 1 H H
+0017: 1 0 0 0 0 H H
+0018: 1 0 0 0 1 H H
+0019: 1 0 0 1 0 L H
+0020: 1 0 0 1 1 L H
+0021: 1 0 1 0 0 H H
+0022: 1 0 1 0 1 H H
+0023: 1 0 1 1 0 H L
+0024: 1 0 1 1 1 H L
+0025: 1 1 0 0 0 H L
+0026: 1 1 0 0 1 H L
+0027: 1 1 0 1 0 H L
+0028: 1 1 0 1 1 H L
+0029: 1 1 1 0 0 H L
+0030: 1 1 1 0 1 H L
+0031: 1 1 1 1 0 H H
+0032: 1 1 1 1 1 H H

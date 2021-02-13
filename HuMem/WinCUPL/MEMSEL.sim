@@ -1,0 +1,32 @@
+%SIGNAL
+PIN   6 =  A3 
+PIN   5 =  A4 
+PIN   4 =  A5 
+PIN   3 =  A6 
+PIN   2 =  A7 
+PIN  18 = !csRAM 
+PIN  19 = !csROM 
+%END
+
+%FIELD
+FIELD BANK = A7,A6,A5,A4,A3
+%END
+
+%EQUATION
+csRAM =>
+    A4 & A5 & !A6 & A7
+  # !A5 & A6 & A7
+  # !A4 & A5 & A6 & A7
+
+csRAM_eqn =>
+    A4 & A5 & !A6 & A7
+  # !A5 & A6 & A7
+  # !A4 & A5 & A6 & A7
+
+csROM =>
+    A4 & !A5 & !A6 & A7
+
+csROM_eqn =>
+    A4 & !A5 & !A6 & A7
+
+%END

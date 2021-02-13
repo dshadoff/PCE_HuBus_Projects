@@ -1,0 +1,54 @@
+Name     Memsel;
+PartNo   CA0017;
+Date     01/31/21;
+Revision 01;
+Designer D. Shadoff;
+Company  Nobody;
+Assembly XXXXX;
+Location XXXXX;
+Device   G16V8A;
+
+
+ORDER: A7, %1, A6, %1, A5, %1, A4, %1, A3, %1, !csROM, %1, !csRAM; 
+
+
+VECTORS:
+/* $MSG  "                ! !"; */
+/* $MSG  "                c c"; */
+/* $MSG  "                s s"; */
+/* $MSG  "                R R"; */
+/* $MSG  "      A A A A A O A"; */
+/* $MSG  "      7 6 5 4 3 M M"; */
+/* $MSG  "     --------------"; */
+00000HH
+00001HH
+00010HH
+00011HH
+00100HH
+00101HH
+00110HH
+00111HH
+01000HH
+01001HH
+01010HH
+01011HH
+01100HH
+01101HH
+01110HH
+01111HH
+10000HH
+10001HH
+10010LH
+10011LH
+10100HH
+10101HH
+10110HL
+10111HL
+11000HL
+11001HL
+11010HL
+11011HL
+11100HL
+11101HL
+11110HH
+11111HH

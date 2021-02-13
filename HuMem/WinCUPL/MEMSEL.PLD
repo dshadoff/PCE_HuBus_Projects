@@ -1,0 +1,34 @@
+Name            Memsel;
+Partno          CA0017;
+Revision        01;
+Date            01/31/21;
+Designer        D. Shadoff;
+Company         Nobody;
+Location        XXXXX;
+Assembly        XXXXX;
+Device          G16V8A;
+
+/******************************************************************/
+/* This program takes a 4-bit HEX number input and outputs */
+/* the necessary signals to drive a 7-segment display */
+/* */
+/******************************************************************/
+/* Allowable Target Device Types: */
+/******************************************************************/
+
+/** Inputs **/
+PIN     [2..6] = [A7..3];
+
+/** Outputs **/
+PIN    19 = !csROM ;
+PIN    18 = !csRAM ;
+
+
+/** Logic Equations **/
+FIELD BANK = [A7..3] ;
+
+csROM_eqn = BANK:[90..9F] ;
+csRAM_eqn = BANK:[B0..EF] ;
+
+csROM = csROM_eqn ;
+csRAM = csRAM_eqn ;

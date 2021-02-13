@@ -1,0 +1,48 @@
+LISTING FOR LOGIC DESCRIPTION FILE: MEMSEL.pld                       Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Fri Feb 05 17:06:37 2021
+
+  1:Name            Memsel;
+  2:Partno          CA0017;
+  3:Revision        01;
+  4:Date            01/31/21;
+  5:Designer        D. Shadoff;
+  6:Company         Nobody;
+  7:Location        XXXXX;
+  8:Assembly        XXXXX;
+  9:Device          G16V8A;
+ 10:
+ 11:/******************************************************************/
+ 12:/* This program takes a 4-bit HEX number input and outputs */
+ 13:/* the necessary signals to drive a 7-segment display */
+ 14:/* */
+ 15:/******************************************************************/
+ 16:/* Allowable Target Device Types: */
+ 17:/******************************************************************/
+ 18:
+ 19:/** Inputs **/
+ 20:PIN     [2..6] = [A7..3];
+ 21:
+ 22:/** Outputs **/
+ 23:PIN    19 = !csROM ;
+ 24:PIN    18 = !csRAM ;
+ 25:
+ 26:
+ 27:/** Logic Equations **/
+ 28:FIELD BANK = [A7..3] ;
+ 29:
+ 30:csROM_eqn = BANK:[90..9F] ;
+ 31:csRAM_eqn = BANK:[B0..EF] ;
+ 32:
+ 33:csROM = csROM_eqn ;
+ 34:csRAM = csRAM_eqn ;
+ 35:
+ 36:
+
+
+
+Jedec Fuse Checksum       (1b0f)
+Jedec Transmit Checksum   (959f)
