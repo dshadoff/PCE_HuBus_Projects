@@ -29,8 +29,8 @@ the card-edge: I use sandpaper of about 180 grit, and sand gently by hand until 
 slightly less than 1mm exists evenly.
 
 For attaching the header (and card edge connector), I clip the leads as close as possible to
-the board, so that no sharp edges remain after the soldering.  Ideally, the solder is level,
-but a gentle convex curve is acceptable.
+the board **before soldering**, so that no sharp edges remain after the soldering.
+Ideally, the solder is level, but a gentle convex curve is acceptable.
 
 
 ## HuMem board
