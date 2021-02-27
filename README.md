@@ -93,10 +93,19 @@ on this board).  The key files to reference in that folder are:
 - USBSEL.PLD - the CUPL source code; should be more or less self-explanatory
 - USBSEL.jed - used for programming the GAL device
 
+## HuXtension board
 
+![HuXtension board](images/HuXtension.jpg)
 
-## More to come !
+This is something I've wanted for perhaps 30 years.
+Perhaps you've seen the GPIO extenders for Raspberry Pi, which have a ribbon cable and a small board,
+taking all GPIOs and placing them into a breadboard neatly.  Those boards have many pins connected
+to ground which would be VERY BAD for this system.
 
+But the ribbon cables are still good, and the board itself is basically trivial.
+
+All you will need are pin headers to go into a breadboard, and a 2x20 GPIO pin header to put the
+ribbon cable on.
 
 
 ## Notes:
