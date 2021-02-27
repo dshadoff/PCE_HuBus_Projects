@@ -1,0 +1,75 @@
+Name            USBsel;
+Partno          CA0017;
+Revision        01;
+Date            02/06/21;
+Designer        D. Shadoff;
+Company         Nobody;
+Location        XXXXX;
+Assembly        XXXXX;
+Device          G22V10;
+
+/******************************************************************/
+/* This program evalates the address bus and selects one of two   */
+/* output registers (or one input register based on address lines,*/
+/* /Output Enable, and /Write                                     */
+/*                                                                */
+/******************************************************************/
+/* Allowable Target Device Types: */
+/******************************************************************/
+
+/** Inputs **/
+PIN     [2..9]   = [A7..0];
+PIN     [10..11] = [B4..3];
+PIN     [13..15] = [B2..0];
+PIN     16       = C0;
+PIN     17       = WE_N_IN;
+PIN     18       = OE_N_IN;
+
+
+/** Outputs **/
+PIN    23 = !csREG ;  /* output status data onto data bus - drives /OE on buffer */
+PIN    22 = !csDATA ; /* input/output data onto data bus  - drives /OE on buffer (DIR on buffer comes from bus) */
+PIN    21 = wrDATA ;  /* WR goes HIGH, THEN LOW for writing DATA to FIFO on FT245 */
+PIN    20 = !rdDATA ; /* /RD active low for reading DATA from FIFO on FT245 */
+
+/** Logic Equations **/
+FIELD BANK = [A7..0] ;
+FIELD ADDR = [B4..0] ;
+
+B1.oe = 'b'0;
+B0.oe = 'b'0;
+C0.oe = 'b'0;
+WE_N_IN.oe = 'b'0;
+OE_N_IN.oe = 'b'0;
+
+
+csBANK_eqn = BANK:['h'FF] ;
+csHDWR_eqn = ADDR:['h'1C] ;
+
+
+/* enable /OE on status tristate buffer when:   */
+/* - address is $FF:$1C01, AND                  */
+/* - /OE from bus is low                        */
+
+csREG  = csBANK_eqn & csHDWR_eqn & C0 & !OE_N_IN;
+
+
+/* enable /OE on data tristate buffer when:     */
+/* - address is $FF:$1C00, AND                  */
+/* - /OE from bus is low OR /WE from bus is low */
+
+csDATA = csBANK_eqn & csHDWR_eqn & !C0 & (!WE_N_IN # !OE_N_IN);
+
+
+/* enable WR (to FIFO) on FT245 when:           */
+/* - address is $FF:$1C00, AND                  */
+/* - /WE from bus is low                        */
+
+wrDATA = csBANK_eqn & csHDWR_eqn & !C0 & !WE_N_IN;
+
+
+/* enable /RD (from FIFO) on FT245 when:        */
+/* - address is $FF:$1C00, AND                  */
+/* - /OE from bus is low                        */
+
+rdDATA = csBANK_eqn & csHDWR_eqn & !C0 & !OE_N_IN;

@@ -62,6 +62,39 @@ on this board).  The key files to reference in that folder are:
 - MEMSEL.si  - simulation test inputs/outputs for validation of the design
 - MEMSEL.jed - used for programming the GAL device
 
+## HuUSB board
+
+![HuUSB board](images/HuUSB.jpg)
+
+This board attaches to the bus, and presents an FTDI FT245RL to the bus:
+- at $FF:$1C00 : data input/output
+- at $FF:$1C01 : status
+  - bits 7-4 (most-significant nybble):  value $Ax for identification
+  - bits 3-2 : value 0, 0
+  - bit  1 : TX ready : when low, it is ready for data to be sent to USB
+  - bit  0 : RX ready : when low, there is data waiting in the FIFO to be read
+
+Transfer speed is faster than the PC Engine can process at hundreds of kilobytes per second
+
+I have included the gerbers and relevant bom.csv and assembly.csv files to get these boards
+assembled by JLCPCB, but you will still need the following parts:
+- ATF22V10CQZ, PDIP (and socket), and an EPROM programmer capable of programming these
+- a longer-than-usual 2x20 DIP header, such as PRT-16763 from Sparkfun
+- a USB mini cable (older style; these are more durable than the micro connectors)
+
+### GAL logic
+The GAL (ATF22V10CQZ) serves as the address decoder on this board, and can be reprogrammed to
+locate the USB memory map anywhere in the address space - but it only decodes 13 bits of the address,
+so it reserves 256 bytes for the sake of only 2.
+
+The logic for this was assembled using an obsolete software package, WinCUPL, because there are
+very few ways to program for 5V logic anymore (and I didn't want to use level-shift for everything
+on this board).  The key files to reference in that folder are:
+- USBSEL.PLD - the CUPL source code; should be more or less self-explanatory
+- USBSEL.jed - used for programming the GAL device
+
+
+
 ## More to come !
 
 

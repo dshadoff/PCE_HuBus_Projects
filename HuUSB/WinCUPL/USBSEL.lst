@@ -1,0 +1,97 @@
+LISTING FOR LOGIC DESCRIPTION FILE: USBSEL.pld                       Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Feb 27 11:02:21 2021
+
+  1:Name            USBsel;
+  2:Partno          CA0017;
+  3:Revision        01;
+  4:Date            02/06/21;
+  5:Designer        D. Shadoff;
+  6:Company         Nobody;
+  7:Location        XXXXX;
+  8:Assembly        XXXXX;
+  9:Device          G22V10;
+ 10:
+ 11:/******************************************************************/
+ 12:/* This program evalates the address bus and selects one of two   */
+ 13:/* output registers (or one input register based on address lines,*/
+ 14:/* /Output Enable, and /Write                                     */
+ 15:/*                                                                */
+ 16:/******************************************************************/
+ 17:/* Allowable Target Device Types: */
+ 18:/******************************************************************/
+ 19:
+ 20:/** Inputs **/
+ 21:PIN     [2..9]   = [A7..0];
+ 22:PIN     [10..11] = [B4..3];
+ 23:PIN     [13..15] = [B2..0];
+ 24:PIN     16       = C0;
+ 25:PIN     17       = WE_N_IN;
+ 26:PIN     18       = OE_N_IN;
+ 27:
+ 28:
+ 29:/** Outputs **/
+ 30:PIN    23 = !csREG ;  /* output status data onto data bus - drives /OE on buffer */
+ 31:PIN    22 = !csDATA ; /* input/output data onto data bus  - drives /OE on buffer (DIR on buffer comes from bus) */
+ 32:PIN    21 = wrDATA ;  /* WR goes HIGH, THEN LOW for writing DATA to FIFO on FT245 */
+ 33:PIN    20 = !rdDATA ; /* /RD active low for reading DATA from FIFO on FT245 */
+ 34:
+ 35:/** Logic Equations **/
+ 36:FIELD BANK = [A7..0] ;
+ 37:FIELD ADDR = [B4..0] ;
+ 38:
+ 39:B1.oe = 'b'0;
+ 40:B0.oe = 'b'0;
+ 41:C0.oe = 'b'0;
+ 42:WE_N_IN.oe = 'b'0;
+ 43:OE_N_IN.oe = 'b'0;
+ 44:
+ 45:
+ 46:csBANK_eqn = BANK:['h'FF] ;
+ 47:csHDWR_eqn = ADDR:['h'1C] ;
+ 48:
+ 49:
+ 50:/* enable /OE on status tristate buffer when:   */
+ 51:/* - address is $FF:$1C01, AND                  */
+ 52:/* - /OE from bus is low                        */
+ 53:
+
+LISTING FOR LOGIC DESCRIPTION FILE: USBSEL.pld                       Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Feb 27 11:02:21 2021
+
+ 54:csREG  = csBANK_eqn & csHDWR_eqn & C0 & !OE_N_IN;
+ 55:
+ 56:
+ 57:/* enable /OE on data tristate buffer when:     */
+ 58:/* - address is $FF:$1C00, AND                  */
+ 59:/* - /OE from bus is low OR /WE from bus is low */
+ 60:
+ 61:csDATA = csBANK_eqn & csHDWR_eqn & !C0 & (!WE_N_IN # !OE_N_IN);
+ 62:
+ 63:
+ 64:/* enable WR (to FIFO) on FT245 when:           */
+ 65:/* - address is $FF:$1C00, AND                  */
+ 66:/* - /WE from bus is low                        */
+ 67:
+ 68:wrDATA = csBANK_eqn & csHDWR_eqn & !C0 & !WE_N_IN;
+ 69:
+ 70:
+ 71:/* enable /RD (from FIFO) on FT245 when:        */
+ 72:/* - address is $FF:$1C00, AND                  */
+ 73:/* - /OE from bus is low                        */
+ 74:
+ 75:rdDATA = csBANK_eqn & csHDWR_eqn & !C0 & !OE_N_IN;
+ 76:
+ 77:
+
+
+
+Jedec Fuse Checksum       (2df7)
+Jedec Transmit Checksum   (ec92)

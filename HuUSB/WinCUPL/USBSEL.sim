@@ -1,0 +1,76 @@
+%SIGNAL
+PIN   9 =  A0 
+PIN   8 =  A1 
+PIN   7 =  A2 
+PIN   6 =  A3 
+PIN   5 =  A4 
+PIN   4 =  A5 
+PIN   3 =  A6 
+PIN   2 =  A7 
+PIN  15 =  B0 
+PIN  14 =  B1 
+PIN  13 =  B2 
+PIN  11 =  B3 
+PIN  10 =  B4 
+PIN  16 =  C0 
+PIN  18 =  OE_N_IN 
+PIN  17 =  WE_N_IN 
+PIN  22 = !csDATA 
+PIN  23 = !csREG 
+PIN  20 = !rdDATA 
+PIN  21 =  wrDATA 
+%END
+
+%FIELD
+FIELD ADDR = B4,B3,B2,B1,B0
+FIELD BANK = A7,A6,A5,A4,A3,A2,A1,A0
+%END
+
+%EQUATION
+B0.oe  =>
+    0 
+
+B1.oe  =>
+    0 
+
+C0.oe  =>
+    0 
+
+OE_N_IN.oe  =>
+    0 
+
+WE_N_IN.oe  =>
+    0 
+
+csBANK_eqn =>
+    A0 & A1 & A2 & A3 & A4 & A5 & A6 & A7
+
+csDATA =>
+    A0 & A1 & A2 & A3 & A4 & A5 & A6 & A7 & !B0 & !B1 & B2 & B3 & B4 & !C0 & !WE_N_IN
+  # A0 & A1 & A2 & A3 & A4 & A5 & A6 & A7 & !B0 & !B1 & B2 & B3 & B4 & !C0 & !OE_N_IN
+
+csHDWR_eqn =>
+    !B0 & !B1 & B2 & B3 & B4
+
+csREG =>
+    A0 & A1 & A2 & A3 & A4 & A5 & A6 & A7 & !B0 & !B1 & B2 & B3 & B4 & C0 & !OE_N_IN
+
+rdDATA =>
+    A0 & A1 & A2 & A3 & A4 & A5 & A6 & A7 & !B0 & !B1 & B2 & B3 & B4 & !C0 & !OE_N_IN
+
+wrDATA =>
+    A0 & A1 & A2 & A3 & A4 & A5 & A6 & A7 & !B0 & !B1 & B2 & B3 & B4 & !C0 & !WE_N_IN
+
+csDATA.oe  =>
+    1 
+
+csREG.oe  =>
+    1 
+
+rdDATA.oe  =>
+    1 
+
+wrDATA.oe  =>
+    1 
+
+%END
