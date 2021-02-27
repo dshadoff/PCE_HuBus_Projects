@@ -108,6 +108,11 @@ All you will need are pin headers to go into a breadboard, and a 2x20 GPIO pin h
 ribbon cable on.
 
 
+## All Boards, Stacked:
+
+![All Boards Stacked](images/Stacked.jpg)
+
+
 ## Notes:
 
 I designed all boards using the free version of EAGLE (2-layer, less than 100mm
