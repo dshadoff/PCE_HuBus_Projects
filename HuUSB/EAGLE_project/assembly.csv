@@ -1,4 +1,4 @@
-Designator,Mid X,Mid Y,Layer,Rotation
+﻿Designator,Mid X,Mid Y,Layer,Rotation
 C1,25.37,3.1,Top,0
 C2,27,18.77,Top,0
 C3,50.95,11.33,Top,90
@@ -18,3 +18,5 @@ L1,47.8,10.52,Top,180
 R1,38.18,15.37,Top,0
 R2,38.15,12.83,Top,0
 R3,41.2,19.18,Top,90
+R4,41.15,9.98,Top,0
+R5,41.12,7.92,Top,0
